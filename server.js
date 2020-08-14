@@ -6,7 +6,10 @@ const app = express()
 // DB config
 const db = require('./config/keys').mongoURI
 
-mongoose.connect(db)
+mongoose.connect(db, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 .then(() => {
     console.log("mongoose connected")
 })
