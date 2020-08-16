@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const port = process.env.PORT || 5000
 
 
@@ -28,12 +29,13 @@ mongoose.connect(db, {
     console.log(e)
 })
 
-app.get('/', (req, res) => {
-    res.send("Welcome to our home route")
-})
+//passport midddleware
+app.use(passport.initialize());
 
-//User routes
+//passport config
+require('./config/passport')(passport)
 
+//routes
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
